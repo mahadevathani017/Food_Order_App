@@ -1,28 +1,30 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
+
 import { useEffect, useState } from "react";
 
 
 const Body = () => {
     // Local State variabl or reactjs variable-superpower varible
-    const [listOfRestaurants, setlistOfRestaurants] = useState(resList);
+    const [listOfRestaurants, setlistOfRestaurants] = useState([]);
     // Normal js variable
 
-    useEffect(()=>{
-    
-      fetchData(); 
-          },[]);
-      
-    const fetchData = async () =>{
+    useEffect(() => {
+
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
         const data = await fetch(
-          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9578269&lng=77.5981177&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9578269&lng=77.5981177&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         );
 
         const json = await data.json();
-         
+
         console.log(json);
+        setlistOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle.restaurants)
+
     }
-    
+
     return (
         <div className="body">
             <div className="filter"><button className="filter-btn" onClick={() => {
