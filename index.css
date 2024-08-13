@@ -84,9 +84,18 @@
   flex-wrap: wrap;
 }
 .shimmer-cards{
-  margin: 20px;
-  width: 281px;
+  margin: 30px;
+  width: 310px;
   height: 361px;
   background-color:#f0f0f0;
 
+}
+
+.login-btn{
+
+  margin: 25px;
+  border-radius: 50px;
+  box-shadow: 10px 10px 20px #babecc, -10px -10px 20px #ffff;
+  cursor: pointer;
+  font-size: 24px;
 }
