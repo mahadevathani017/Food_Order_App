@@ -76,4 +76,17 @@
 .filter-btn{
   margin: 10px;
   cursor: pointer;
+
+}
+
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.shimmer-cards{
+  margin: 20px;
+  width: 281px;
+  height: 361px;
+  background-color:#f0f0f0;
+
 }
