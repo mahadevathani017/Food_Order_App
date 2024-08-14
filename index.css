@@ -76,8 +76,13 @@
 .filter-btn{
   margin: 10px;
   cursor: pointer;
-
 }
+
+.filter{
+    display: flex;
+    
+}
+
 
 .shimmer-container{
   display: flex;
