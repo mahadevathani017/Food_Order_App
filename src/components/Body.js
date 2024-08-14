@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-  
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
+  const [filteredRestaurant,setFilteredRestaurant]=useState([])
 
-  const [searchText, setSerachText] = useState("");
+  const [searchText, setSerachText] = useState(" ");
+
   
 
   useEffect(() => {
@@ -21,10 +22,12 @@ const Body = () => {
 
     const json = await data.json();
 
-    console.log(json);
+    
     setlistOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle.restaurants
     );
+    setFilteredRestaurant(
+    json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle.restaurants);
   };
 
   if (listOfRestaurants.length == 0) {
@@ -35,13 +38,27 @@ const Body = () => {
     <div className="body">
       <div className="filter">
         <div className="search">
-          <input type="text" className="search-box" value={searchText} onChange={(e) =>{
-             setSerachText(e.target.value);
-          }} />
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSerachText(e.target.value);
+            }}
+          />
 
-          <button onClick={() => {
+          <button
+            onClick={() => {
+              const filteredResLists = listOfRestaurants.filter(
+                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              setFilteredRestaurant(filteredResLists);
              
-          }}>Search</button>
+            }}
+          >
+            
+            Search
+          </button>
         </div>
         <button
           className="filter-btn"
@@ -56,7 +73,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
+        {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
